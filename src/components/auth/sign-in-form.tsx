@@ -23,13 +23,13 @@ import { authClient } from "@/lib/auth/client";
 import { useUser } from "@/hooks/use-user";
 
 const schema = zod.object({
-  email: zod.string().min(1, { message: "Email is required" }).email(),
+  username: zod.string().min(1, { message: "Email is required" }),
   password: zod.string().min(1, { message: "Password is required" }),
 });
 
 type Values = zod.infer<typeof schema>;
 
-const defaultValues = { email: "alisha@gmail.com", password: "alisha09" };
+const defaultValues = { username: "alisha", password: "alisha09" };
 export function SignInForm(): React.JSX.Element {
   const router = useRouter();
 
@@ -72,13 +72,13 @@ export function SignInForm(): React.JSX.Element {
         <Stack spacing={2}>
           <Controller
             control={control}
-            name="email"
+            name="username"
             render={({ field }) => (
-              <FormControl error={Boolean(errors.email)}>
-                <InputLabel>Email address</InputLabel>
-                <OutlinedInput {...field} label="Email address" type="email" />
-                {errors.email ? (
-                  <FormHelperText>{errors.email.message}</FormHelperText>
+              <FormControl error={Boolean(errors.username)}>
+                <InputLabel>Username</InputLabel>
+                <OutlinedInput {...field} label="username" type="text" />
+                {errors.username ? (
+                  <FormHelperText>{errors.username.message}</FormHelperText>
                 ) : null}
               </FormControl>
             )}
@@ -131,7 +131,7 @@ export function SignInForm(): React.JSX.Element {
       <Alert color="warning">
         Use{" "}
         <Typography component="span" sx={{ fontWeight: 700 }} variant="inherit">
-          alisha@gmail.com
+          alisha
         </Typography>{" "}
         with password{" "}
         <Typography component="span" sx={{ fontWeight: 700 }} variant="inherit">
